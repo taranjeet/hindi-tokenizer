@@ -35,3 +35,14 @@ t=Tokenizer()
 t.read_from_file('filename_here')
 ```
 
+A brief description about all the functions
+
+<a name="readfromfile">**read_from_file**</a>
+
+This function takes the name of the file which is present in the current directory and reads it.
+
+```python
+t.read_from_file('hindi_file.txt')
+```
+
+
