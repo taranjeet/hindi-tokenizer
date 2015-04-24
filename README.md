@@ -9,7 +9,7 @@ from HindiTokenizer import Tokenizer
 
 This package implements various funcions, which are listed as below:
 
-* [read_from_file](www.dummy.com)
+* [read_from_file](#readfromfile)
 * [generate_sentences]()
 * [tokenize]()
 * [generate_freq_dict]()
