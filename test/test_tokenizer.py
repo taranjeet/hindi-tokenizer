@@ -27,8 +27,9 @@ class TestHindiTokenizer(unittest.TestCase):
             self.assertEqual(filtered_tokens[i].encode('utf8'), data.TOKENIZE['TOKENS']['SENT2']['OUTPUT'][i])
 
     def test_stem(self):
-        stem_word = stem(data.TOKENIZE['STEM']['WORD1']['INPUT'])
-        self.assertEqual(stem_word.encode('utf8'), data.TOKENIZE['STEM']['WORD1']['OUTPUT'])
+        for key, value in data.TOKENIZE['STEM'].items():
+            stem_word = stem(value['INPUT'])
+            self.assertEqual(stem_word.encode('utf8'), value['OUTPUT'])
 
     def test_stopwords(self):
         stopwords = stopwords_list()

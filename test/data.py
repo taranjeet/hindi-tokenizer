@@ -21,9 +21,13 @@ TOKENIZE = {
         'WORD1': {
             'INPUT': 'सहायता',
             'OUTPUT': 'सहाय'
+        },
+        'WORD2': {
+            'INPUT': 'बावजूद',
+            'OUTPUT': 'बावजूद'
         }
     },
     'STOPWORDS': {
-        'WORD1': 'उसे'
+        'WORD1': 'इस'
     }
 }
