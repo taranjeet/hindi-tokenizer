@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 # Distribution / packaging
-py/*
+py*/*
 build/
 develop-eggs/
 dist/
@@ -18,3 +18,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Coverage related files
+htmlcov/*
+.coverage
