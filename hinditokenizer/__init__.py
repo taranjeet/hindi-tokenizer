@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 
+__version__ = '0.0.1'
+
 from .data import STOPWORDS, SUFFIXES
 
 
 def tokenize_sent(text):
     '''This generates a list for sentences.'''
-    sentences = text.decode('utf8').split(u'।')
+    if isinstance(text, str):
+        text = text.decode('utf8')
+    sentences = text.split(u'।')
     return [sentence.strip() for sentence in sentences if sentence]
 
 
@@ -16,16 +20,26 @@ def tokenize(text):
             for token in sentence.split(' ')]
 
 
-def remove_hyphenated_tokens(tokens):
+def remove_hyphenated_tokens(tokens, verbose_mode=False):
     '''Handles the case of words separated over hyphen'''
-    for token in tokens:
+    filtered_tokens = [token for token in tokens]
+    hyphenTokenPresent = False
+
+    for token in filtered_tokens:
         if '-' in token:
+            hyphenTokenPresent = True
             pair = token.split('-')
-            idx = tokens.index(token)
-            tokens.remove(token)
-            tokens.insert(idx, pair[0])
-            tokens.insert(idx+1, pair[1])
-    return tokens
+            idx = filtered_tokens.index(token)
+            filtered_tokens.remove(token)
+            filtered_tokens.insert(idx, pair[0])
+            # to handle cases like `घर-घर`
+            if pair[0] != pair[1]:
+                filtered_tokens.insert(idx+1, pair[1])
+    if not verbose_mode:
+        return filtered_tokens
+
+    return [filtered_tokens, hyphenTokenPresent]
+
 
 
 def stem(word):
@@ -53,7 +67,8 @@ def stem(word):
 
         Ported from HindiStemmer.java, part of of Lucene.
     '''
-    word = word.decode('utf8')
+    if isinstance(word, str):
+        word = word.decode('utf8')
     for L in 5, 4, 3, 2, 1:
         if len(word) > L + 1:
             for suf in SUFFIXES[L]:
